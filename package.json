@@ -6,7 +6,7 @@
     "start": "http-server -p 3000"
   },
   "keywords": [],
-  "author": "",
+  "author": "mitreb",
   "license": "ISC",
   "devDependencies": {
     "http-server": "^14.1.1"
