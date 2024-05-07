@@ -1,5 +1,11 @@
 import EventEmitter from "./EventEmitter.js";
-import { KEYS, KEY_PRESS_EVENT } from "../constants.js";
+import {
+  KEY_IDS,
+  KEYS,
+  KEY_PANEL,
+  KEY_PRESS_EVENT,
+  KEY_TYPES,
+} from "../constants/keys.js";
 
 const DISPLAY_EXPRESSION_CLASS = 'calculator__expression';
 const DISPLAY_RESULT_CLASS = 'calculator__result';
@@ -38,19 +44,19 @@ class CalculatorView extends EventEmitter {
 
     const keysContainer = templateElement.content.querySelector('.' + KEYS_CLASS);
 
-    for (const row of KEYS) {
+    for (const row of KEY_PANEL) {
       for (const key of row) {
         const keyElement = document.createElement('button');
-        keyElement.innerHTML = key.label;
-        keyElement.dataset.value = key.value;
+        keyElement.innerHTML = KEYS[key].label;
+        keyElement.dataset.key = key;
         keyElement.classList.add(KEY_CLASS);
-        if (key.primary) {
+        if (KEYS[key].primary) {
           keyElement.classList.add(KEY_PRIMARY_CLASS);
         }
-        if (key.type === 'number') {
+        if (KEYS[key].type === KEY_TYPES.NUMBER) {
           keyElement.classList.add(KEY_NUMBER_CLASS);
         }
-        if (key.value === '0') {
+        if (key === KEY_IDS.ZERO) {
           keyElement.classList.add(KEY_ZERO_CLASS);
         }
         keysContainer.append(keyElement);
@@ -61,9 +67,9 @@ class CalculatorView extends EventEmitter {
   }
 
   onKeyClick(event) {
-    const { value } = event.target.dataset;
-    if (value) {
-      this.emit(KEY_PRESS_EVENT, { value });
+    const { key } = event.target.dataset;
+    if (key) {
+      this.emit(KEY_PRESS_EVENT, { key });
     }
   }
 

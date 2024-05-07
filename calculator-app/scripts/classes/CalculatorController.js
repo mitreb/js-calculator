@@ -1,4 +1,8 @@
-import { KEY_PRESS_EVENT } from "../constants.js";
+import {
+  KEY_IDS,
+  KEYS,
+  KEY_PRESS_EVENT,
+} from "../constants/keys.js";
 
 class CalculatorController {
   constructor(model, view) {
@@ -9,22 +13,23 @@ class CalculatorController {
     this.updateView();
   }
 
-  handleKeyPress({ value }) {
-    if (value === '=') {
+  handleKeyPress({ key }) {
+    if (key === KEY_IDS.EQUALS) {
       this.model.compute();
-    } else if (value === 'clear') {
+    } else if (key === KEY_IDS.CLEAR) {
       this.model.reset();
-    } else if (value === 'delete') {
+    } else if (key === KEY_IDS.DELETE) {
       this.model.delete();
-    } else if (value === 'mc') {
+    } else if (key === KEY_IDS.MEMORY_CLEAR) {
       this.model.clearMemory();
-    } else if (value === 'm+') {
+    } else if (key === KEY_IDS.MEMORY_ADD) {
       this.model.addToMemory();
-    } else if (value === 'm-') {
+    } else if (key === KEY_IDS.MEMORY_SUBTRACT) {
       this.memory.subtractFromMemory();
-    } else if (value === 'mr') {
+    } else if (key === KEY_IDS.MEMORY_RECALL) {
       this.model.recallMemory();
     } else {
+      const { value } = KEYS[KEY_IDS[key]];
       this.model.addToExpression(value);
     }
 

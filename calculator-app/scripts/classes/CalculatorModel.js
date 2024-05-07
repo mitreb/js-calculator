@@ -1,5 +1,5 @@
-import { factorial } from '../utils.js';
 import Memory from "./Memory.js";
+import { factorial } from '../utils.js';
 
 class CalculatorModel {
   /** The expression to be evaluated. */
@@ -44,7 +44,6 @@ class CalculatorModel {
    */
 
   #prepareExpression() {
-    console.log(this.#expression);
     const result = this.#expression
       .replace(/x/g, '*')
       .replace(/÷/g, '/')
@@ -62,7 +61,6 @@ class CalculatorModel {
       .replace(/ch\(/g, 'Math.cosh(')
       .replace(/th\(/g, 'Math.tanh(')
       .replace(/fact\(/g, 'factorial(');
-    console.log(result);
     return result;
   }
 

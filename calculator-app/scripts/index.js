@@ -1,7 +1,7 @@
 import CalculatorModel from './classes/CalculatorModel.js';
 import CalculatorView from './classes/CalculatorView.js';
 import CalculatorController from './classes/CalculatorController.js';
-import { ROOT_ELEMENT_SELECTOR } from './constants.js';
+import { ROOT_ELEMENT_SELECTOR } from './constants/index.js';
 
 function main() {
   const model = new CalculatorModel();
