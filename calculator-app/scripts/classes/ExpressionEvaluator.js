@@ -1,4 +1,8 @@
 import * as functions from '../functions.js';
+import {
+  KEYS,
+  KEY_TYPES,
+} from '../constants/keys.js';
 
 class ExpressionEvaluator {
   /**
@@ -7,24 +11,22 @@ class ExpressionEvaluator {
    * @returns {string} The expression with the replaced operators.
    */
   static prepareExpression(expression) {
-    // TODO: Get rid of the hardcoded values and use the KEYS object instead. 
-    const result = expression
-      .replace(/x/g, '*')
-      .replace(/÷/g, '/')
-      .replace(/\^/g, '**')
-      .replace(/√\(/g, 'functions.sqrt(')
-      .replace(/π/g, 'Math.PI')
-      .replace(/e/g, 'Math.E')
-      .replace(/sin\(/g, 'functions.sin(')
-      .replace(/cos\(/g, 'functions.cos(')
-      .replace(/tan\(/g, 'functions.tan(')
-      .replace(/log\(/g, 'functions.log(')
-      .replace(/ln\(/g, 'functions.ln(')
-      .replace(/abs\(/g, 'functions.abs(')
-      .replace(/sh\(/g, 'functions.sinh(')
-      .replace(/ch\(/g, 'functions.cosh(')
-      .replace(/th\(/g, 'functions.tanh(')
-      .replace(/fact\(/g, 'functions.fact(');
+    let result = expression;
+    for (const key of Object.values(KEYS)) {
+      const keyValue = key.value;
+      if (keyValue) {
+        const keyInput = key.input;
+        const pattern = keyInput.replace('(', '\\(').replace('^', '\\^');
+
+        let prefix = '';
+        const isFunction = key.type === KEY_TYPES.FUNCTION;
+        if (isFunction) {
+          prefix = 'functions.';
+        }
+
+        result = result.replace(new RegExp(pattern, 'g'), `${prefix}${keyValue}`);
+      }
+    }
     return result;
   }
 
