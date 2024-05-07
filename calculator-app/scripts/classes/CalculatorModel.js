@@ -1,5 +1,5 @@
 import Memory from "./Memory.js";
-import { factorial } from '../utils.js';
+import ExpressionEvaluator from "./ExpressionEvaluator.js";
 
 class CalculatorModel {
   /** The expression to be evaluated. */
@@ -37,39 +37,10 @@ class CalculatorModel {
   }
 
   /**
-   * Prepare the expression for evaluation.
-   * Replace the mathematical symbols with the JavaScript operators.
-   * @private
-   * @returns {string} The expression with the replaced operators.
-   */
-
-  #prepareExpression() {
-    const result = this.#expression
-      .replace(/x/g, '*')
-      .replace(/÷/g, '/')
-      .replace(/\^/g, '**')
-      .replace(/√/g, 'Math.sqrt')
-      .replace(/π/g, 'Math.PI')
-      .replace(/e/g, 'Math.E')
-      .replace(/sin\(/g, 'Math.sin(')
-      .replace(/cos\(/g, 'Math.cos(')
-      .replace(/tan\(/g, 'Math.tan(')
-      .replace(/log\(/g, 'Math.log(')
-      .replace(/ln\(/g, 'Math.log(')
-      .replace(/abs\(/g, 'Math.abs(')
-      .replace(/sh\(/g, 'Math.sinh(')
-      .replace(/ch\(/g, 'Math.cosh(')
-      .replace(/th\(/g, 'Math.tanh(')
-      .replace(/fact\(/g, 'factorial(');
-    return result;
-  }
-
-  /**
    * Compute the result based on the input.
    */
   compute() {
-    const expression = this.#prepareExpression();
-    this.#result = eval(expression);
+    this.#result = ExpressionEvaluator.evaluate(this.#expression);
     this.#afterComputation = true;
   }
 

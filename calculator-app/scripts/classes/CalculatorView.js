@@ -1,10 +1,10 @@
 import EventEmitter from "./EventEmitter.js";
 import {
   KEY_IDS,
+  KEY_TYPES,
   KEYS,
   KEY_PANEL,
   KEY_PRESS_EVENT,
-  KEY_TYPES,
 } from "../constants/keys.js";
 
 const DISPLAY_EXPRESSION_CLASS = 'calculator__expression';

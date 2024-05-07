@@ -29,8 +29,8 @@ class CalculatorController {
     } else if (key === KEY_IDS.MEMORY_RECALL) {
       this.model.recallMemory();
     } else {
-      const { value } = KEYS[KEY_IDS[key]];
-      this.model.addToExpression(value);
+      const { input } = KEYS[KEY_IDS[key]];
+      this.model.addToExpression(input);
     }
 
     this.updateView();
