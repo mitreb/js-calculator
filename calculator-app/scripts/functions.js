@@ -18,6 +18,15 @@ export function ln(n) {
 }
 
 /**
+ * Returns the base 10 logarithm of a number.
+ * @param {number} n
+ * @returns {number}
+ */
+export function log(n) {
+  return Math.log10(n);
+}
+
+/**
  * Returns the sine of a number.
  * @param {number} n
  * @returns {number}

@@ -19,7 +19,7 @@ class ExpressionEvaluator {
       .replace(/cos\(/g, 'functions.cos(')
       .replace(/tan\(/g, 'functions.tan(')
       .replace(/log\(/g, 'functions.log(')
-      .replace(/ln\(/g, 'functions.log(')
+      .replace(/ln\(/g, 'functions.ln(')
       .replace(/abs\(/g, 'functions.abs(')
       .replace(/sh\(/g, 'functions.sinh(')
       .replace(/ch\(/g, 'functions.cosh(')
