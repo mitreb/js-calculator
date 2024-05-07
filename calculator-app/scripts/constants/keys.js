@@ -41,6 +41,7 @@ export const KEY_IDS = {
   FACT: 'FACT',
 };
 
+/* Key types */
 export const KEY_TYPES = {
   NUMBER: 'NUMBER',
   CONSTANT: 'CONSTANT',
@@ -49,7 +50,14 @@ export const KEY_TYPES = {
   SYSTEM: 'SYSTEM',
 }
 
-/* Key definitions */
+/*
+  * Key definitions
+  * label: The text to display on the key.
+  * input: The input to append to the expression.
+  * value: The value to replace the input with in the expression.
+  * type: The type of the key.
+  * primary: Whether the key is a primary operator.
+*/
 export const KEYS = {
   [KEY_IDS.ONE]: { label: '1', input: '1', type: KEY_TYPES.NUMBER },
   [KEY_IDS.TWO]: { label: '2', input: '2', type: KEY_TYPES.NUMBER },
@@ -165,4 +173,5 @@ export const KEEP_RESULT_KEYS = [
   KEY_IDS.MEMORY_RECALL,
 ];
 
+/* Events */
 export const KEY_PRESS_EVENT = 'key-press';

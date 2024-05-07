@@ -24,21 +24,40 @@ const TEMPLATE = `
   <div class="${KEYS_CLASS}"></div>
 </div>`;
 
+/**
+ * Class to represent the calculator view.
+ */
 class CalculatorView extends EventEmitter {
+  #root;
+  #displayExpression
+  #displayResult;
+  #keys;
+
+  /**
+   * Creates an instance of the CalculatorView.
+   * @param {HTMLElement} root The root element to attach the view.
+   * @returns {CalculatorView} The view instance.
+   * @constructor
+   */
   constructor(root) {
     super();
 
-    this.root = root;
-    this.render();
+    this.#root = root;
+    this.#render();
 
-    this.displayExpression = document.querySelector('.' + DISPLAY_EXPRESSION_CLASS);
-    this.displayResult = document.querySelector('.' + DISPLAY_RESULT_CLASS);
-    this.keys = document.querySelector('.' + KEYS_CLASS);
+    this.#displayExpression = document.querySelector('.' + DISPLAY_EXPRESSION_CLASS);
+    this.#displayResult = document.querySelector('.' + DISPLAY_RESULT_CLASS);
+    this.#keys = document.querySelector('.' + KEYS_CLASS);
 
-    this.keys.addEventListener('click', this.onKeyClick.bind(this));
+    this.#keys.addEventListener('click', this.#onKeyClick.bind(this));
   }
 
-  render() {
+  /**
+   * Renders the calculator view.
+   * @returns {void}
+   * @private
+   */
+  #render() {
     const templateElement = document.createElement('template');
     templateElement.innerHTML = TEMPLATE;
 
@@ -63,22 +82,29 @@ class CalculatorView extends EventEmitter {
       }
     }
 
-    this.root.append(templateElement.content);
+    this.#root.append(templateElement.content);
   }
 
-  onKeyClick(event) {
+  /**
+   * Handles the click event on the key.
+   * @param {Event} event The event object.
+   * @returns {void}
+   * @private
+   */
+  #onKeyClick(event) {
     const { key } = event.target.dataset;
     if (key) {
       this.emit(KEY_PRESS_EVENT, { key });
     }
   }
 
-  updateDisplay(expression, result) {
-    this.displayExpression.textContent = expression;
-    this.displayResult.textContent = this.getOutput(result);
-  }
-
-  getOutput(result) {
+  /** 
+   * Returns the output based on the result.
+   * @param {number|string|SyntaxError} result The result of the expression.
+   * @returns {string} The output based on the result.
+   * @private
+   */
+  #getOutput(result) {
     if (
       Number.isFinite(result) ||
       [Infinity, -Infinity].includes(result)
@@ -91,6 +117,17 @@ class CalculatorView extends EventEmitter {
     } else {
       return 'Error';
     }
+  }
+
+  /**
+   * Updates the display with the expression and result.
+   * @param {string} expression The expression to display.
+   * @param {number|string|SyntaxError} result The result of the expression.
+   * @returns {void}
+   */
+  updateDisplay(expression, result) {
+    this.#displayExpression.textContent = expression;
+    this.#displayResult.textContent = this.#getOutput(result);
   }
 }
 

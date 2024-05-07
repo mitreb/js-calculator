@@ -1,24 +1,40 @@
 import Memory from "./Memory.js";
 import ExpressionEvaluator from "./ExpressionEvaluator.js";
 
+/**
+ * Class to represent the calculator model.
+ * The model is responsible for the calculator's logic.
+ * It stores the expression and the result of the computation.
+ * It also provides methods to interact with the memory.
+ */
 class CalculatorModel {
-  /** The expression to be evaluated. */
   #expression;
-
-  /** The result of the computation. */
   #result;
-
   #memory = new Memory();
 
-  /**
-   * Create a new Calculator.
-   */
   constructor() {
     this.reset();
   }
 
   /**
-   * Reset the calculator to its initial state.
+   * Get the expression.
+   * @returns {string} The expression.
+   */
+  get expression() {
+    return this.#expression;
+  }
+
+  /**
+  * Get the result.
+  * @returns {number|string} The result.
+  */
+  get result() {
+    return this.#result;
+  }
+
+  /**
+   * Resets the calculator to its initial state.
+   * @returns {void} 
    */
   reset() {
     this.#expression = '';
@@ -26,14 +42,16 @@ class CalculatorModel {
   }
 
   /**
-   * Delete the last character from the expression.
+   * Deletes the last character from the expression.
+   * @returns {void}
    */
   delete() {
     this.#expression = this.#expression.slice(0, -1);
   }
 
   /**
-   * Compute the result based on the input.
+   * Computes the result based on the input.
+   * @returns {void}
    */
   compute() {
     try {
@@ -44,40 +62,53 @@ class CalculatorModel {
     }
   }
 
-  get expression() {
-    return this.#expression;
-  }
-
   /**
-   * Add a value to the expression.
-   * @param {string} value 
+   * Adds a value to the expression.
+   * @param {string} value
+   * @returns {void}
    */
   addToExpression(value) {
     this.#expression += value;
   }
 
+  /**
+   * Sets the expression to the result.
+   * @returns {void}
+   */
   setExpressionToResult() {
     this.#expression = Number.isFinite(this.#result)
       ? String(this.#result)
       : '';
   }
 
-  get result() {
-    return this.#result;
-  }
-
+  /**
+   * Clears the memory.
+   * @returns {void}
+   */
   clearMemory() {
     this.#memory.clear();
   }
 
+  /**
+   * Adds the result to the memory.
+   * @returns {void}
+   */
   addToMemory() {
     this.#memory.add(this.#result);
   }
 
+  /**
+   * Subtracts the result from the memory.
+   * @returns {void}
+   */
   subtractFromMemory() {
     this.#memory.subtract(this.#result);
   }
 
+  /**
+   * Recalls the value from the memory.
+   * @returns {void}
+   */
   recallMemory() {
     this.addToExpression(this.#memory.value);
   }

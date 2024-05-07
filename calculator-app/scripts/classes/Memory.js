@@ -1,16 +1,21 @@
+/**
+ * Memory class to store the value.
+ */
 class Memory {
   #value = 0;
 
   /**
-   * Get the value stored in memory.
+   * Get the value from the memory.
+   * @returns {number} The value stored in the memory.
    */
   get value() {
     return this.#value;
   }
 
   /**
-   * Add the value to the memory.
+   * Adds the value to the memory.
    * @param {number} value
+   * @returns {void}
    */
   add(value) {
     if (Number.isFinite(value)) {
@@ -19,8 +24,9 @@ class Memory {
   }
 
   /**
-   * Subtract the value from the memory.
+   * Subtracts the value from the memory.
    * @param {number} value
+   * @returns {void}
    */
   subtract(value) {
     if (Number.isFinite(value)) {
@@ -29,7 +35,8 @@ class Memory {
   }
 
   /**
-   * Clear the memory.
+   * Clears the memory.
+   * @returns {void}
    */
   clear() {
     this.#value = 0;

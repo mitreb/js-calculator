@@ -4,32 +4,49 @@ import {
   KEY_TYPES,
 } from '../constants/keys.js';
 
+/**
+ * Class to evaluate the expression.
+ */
 class ExpressionEvaluator {
   /**
-   * Prepare the expression for evaluation.
-   * Replace the mathematical symbols with the JavaScript operators.
-   * @returns {string} The expression with the replaced operators.
+   * Prepares the expression for evaluation.
+   * For each key, replaces the input with the code stored in the 'value' property of the key.
+   * @param {string} expression The expression to prepare.
+   * @returns {string} The expression ready to be evaluated.
    */
   static prepareExpression(expression) {
     let result = expression;
+
     for (const key of Object.values(KEYS)) {
       const keyValue = key.value;
       if (keyValue) {
+        // Possible input for the key.
         const keyInput = key.input;
-        const pattern = keyInput.replace('(', '\\(').replace('^', '\\^');
 
+        // The prefix is needed to use functions from the functions.js file.
         let prefix = '';
         const isFunction = key.type === KEY_TYPES.FUNCTION;
         if (isFunction) {
           prefix = 'functions.';
         }
 
-        result = result.replace(new RegExp(pattern, 'g'), `${prefix}${keyValue}`);
+        // Replace the input with the code, if the input is found in the expression.
+        const patternToBeReplaced = keyInput.replace('(', '\\(').replace('^', '\\^');
+        const codeToReplaceWith = `${prefix}${keyValue}`;
+        result = result.replace(
+          new RegExp(patternToBeReplaced, 'g'),
+          codeToReplaceWith,
+        );
       }
     }
     return result;
   }
 
+  /**
+   * Evaluates the expression.
+   * @param {string} expression The expression to evaluate.
+   * @returns {number} The result of the expression.
+   */
   static evaluate(expression) {
     const preparedExpression = this.prepareExpression(expression);
     return eval(preparedExpression);

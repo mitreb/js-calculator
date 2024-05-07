@@ -5,19 +5,37 @@ import {
   KEY_PRESS_EVENT,
 } from "../constants/keys.js";
 
+/**
+ * Class to represent the calculator controller.
+ * The controller is responsible for handling the user input.
+ * It listens to key presses and updates the model and view accordingly.
+ */
 class CalculatorController {
-  /** Whether to set the expression to the result we just computed. */
+  // A flag that indicates if the user pressed a key right after the computation.
   #afterComputation;
 
+  /**
+   * Creates an instance of the CalculatorController.
+   * @param {CalculatorModel} model The model instance.
+   * @param {CalculatorView} view The view instance.
+   * @returns {CalculatorController} The controller instance.
+   * @constructor
+   */
   constructor(model, view) {
     this.model = model;
     this.view = view;
 
-    this.view.on(KEY_PRESS_EVENT, this.handleKeyPress.bind(this));
-    this.updateView();
+    this.view.on(KEY_PRESS_EVENT, this.#handleKeyPress.bind(this));
+    this.#updateView();
   }
 
-  handleKeyPress({ key }) {
+  /**
+   * Handles the key press event.
+   * @param {string} key The key pressed.
+   * @returns {void}
+   * @private
+   */
+  #handleKeyPress({ key }) {
     if (this.#afterComputation) {
       if (KEEP_RESULT_KEYS.includes(key)) {
         this.model.setExpressionToResult();
@@ -47,10 +65,15 @@ class CalculatorController {
       this.model.addToExpression(input);
     }
 
-    this.updateView();
+    this.#updateView();
   }
 
-  updateView() {
+  /**
+   * Updates the view.
+   * @returns {void}
+   * @private
+   */
+  #updateView() {
     const { expression, result } = this.model;
     this.view.updateDisplay(expression, result);
   }
