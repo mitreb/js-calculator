@@ -58,7 +58,7 @@ export function tan(n) {
  * @param {number} n
  * @returns {number}
  */
-export function sh(n) {
+export function sinh(n) {
   return Math.sinh(n);
 }
 
@@ -67,7 +67,7 @@ export function sh(n) {
  * @param {number} n
  * @returns {number}
  */
-export function ch(n) {
+export function cosh(n) {
   return Math.cosh(n);
 }
 
@@ -76,7 +76,7 @@ export function ch(n) {
  * @param {number} n
  * @returns {number}
  */
-export function th(n) {
+export function tanh(n) {
   return Math.tanh(n);
 }
 
