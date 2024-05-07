@@ -89,6 +89,15 @@ export function fact(n) {
   if (n === 0) {
     return 1;
   }
+
+  if (n < 0) {
+    return NaN;
+  }
+
+  if (n > 100) {
+    return Number.POSITIVE_INFINITY;
+  }
+
   let result = 1;
 
   for (let i = 1; i <= n; i++) {
