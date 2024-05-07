@@ -40,7 +40,12 @@ class CalculatorModel {
    * Compute the result based on the input.
    */
   compute() {
-    this.#result = ExpressionEvaluator.evaluate(this.#expression);
+    try {
+      const result = ExpressionEvaluator.evaluate(this.#expression);
+      this.#result = result
+    } catch (error) {
+      this.#result = error;
+    }
     this.#afterComputation = true;
   }
 
@@ -62,20 +67,8 @@ class CalculatorModel {
     this.#expression += value;
   }
 
-  /**
-   * Get the result of the computation.
-   * @returns {string} The result as a string.
-   */
-  get output() {
-    return Number.isFinite(this.#result) ? this.#result : 'Error';
-  }
-
   get result() {
     return this.#result;
-  }
-
-  get memory() {
-    return this.#memory;
   }
 
   clearMemory() {

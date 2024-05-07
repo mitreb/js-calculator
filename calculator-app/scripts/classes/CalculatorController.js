@@ -37,8 +37,8 @@ class CalculatorController {
   }
 
   updateView() {
-    const { expression, output } = this.model;
-    this.view.updateDisplay(expression, output);
+    const { expression, result } = this.model;
+    this.view.updateDisplay(expression, result);
   }
 }
 

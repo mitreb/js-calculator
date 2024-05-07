@@ -75,7 +75,22 @@ class CalculatorView extends EventEmitter {
 
   updateDisplay(expression, result) {
     this.displayExpression.textContent = expression;
-    this.displayResult.textContent = result;
+    this.displayResult.textContent = this.getOutput(result);
+  }
+
+  getOutput(result) {
+    if (
+      Number.isFinite(result) ||
+      [Infinity, -Infinity].includes(result)
+    ) {
+      return result.toString();
+    } else if (Number.isNaN(result)) {
+      return 'Not a number';
+    } else if (result instanceof SyntaxError) {
+      return 'Invalid expression';
+    } else {
+      return 'Error';
+    }
   }
 }
 
