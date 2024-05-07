@@ -8,9 +8,6 @@ class CalculatorModel {
   /** The result of the computation. */
   #result;
 
-  /** Whether to set the expression to the result we just computed. */
-  #afterComputation;
-
   #memory = new Memory();
 
   /**
@@ -26,7 +23,6 @@ class CalculatorModel {
   reset() {
     this.#expression = '';
     this.#result = 0;
-    this.#afterComputation = false;
   }
 
   /**
@@ -46,7 +42,6 @@ class CalculatorModel {
     } catch (error) {
       this.#result = error;
     }
-    this.#afterComputation = true;
   }
 
   get expression() {
@@ -57,14 +52,14 @@ class CalculatorModel {
    * Add a value to the expression.
    * @param {string} value 
    */
-
   addToExpression(value) {
-    // if we just computed a result, we the expression to be the result on next input
-    if (this.#afterComputation && Number.isFinite(this.#result)) {
-      this.#expression = String(this.#result);
-      this.#afterComputation = false;
-    }
     this.#expression += value;
+  }
+
+  setExpressionToResult() {
+    this.#expression = Number.isFinite(this.#result)
+      ? String(this.#result)
+      : '';
   }
 
   get result() {

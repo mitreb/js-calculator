@@ -34,6 +34,7 @@ export const KEY_IDS = {
   PI: 'PI',
   POWER: 'POWER',
   SQRT: 'SQRT',
+  SQUARE: 'SQUARE',
   LOG: 'LOG',
   LN: 'LN',
   ABS: 'ABS',
@@ -84,6 +85,7 @@ export const KEYS = {
   [KEY_IDS.PI]: { label: 'π', input: 'π', value: 'Math.PI', type: KEY_TYPES.CONSTANT },
   [KEY_IDS.POWER]: { label: '^', input: '^', value: '**', type: KEY_TYPES.OPERATOR },
   [KEY_IDS.SQRT]: { label: '√', input: '√(', value: 'sqrt(', type: KEY_TYPES.FUNCTION },
+  [KEY_IDS.SQUARE]: { label: 'x²', input: '^2', value: '**2', type: KEY_TYPES.OPERATOR },
   [KEY_IDS.LOG]: { label: 'log', input: 'log(', value: 'log(', type: KEY_TYPES.FUNCTION },
   [KEY_IDS.LN]: { label: 'ln', input: 'ln(', value: 'ln(', type: KEY_TYPES.FUNCTION },
   [KEY_IDS.ABS]: { label: 'abs', input: 'abs(', value: 'abs(', type: KEY_TYPES.FUNCTION },
@@ -106,7 +108,7 @@ export const KEY_PANEL = [
   // Row 2
   [
     KEY_IDS.SQRT,
-    KEY_IDS.POWER,
+    KEY_IDS.SQUARE,
     KEY_IDS.OPEN_PARENTHESIS,
     KEY_IDS.CLOSE_PARENTHESIS,
     KEY_IDS.SEVEN,
@@ -146,6 +148,21 @@ export const KEY_PANEL = [
     KEY_IDS.DECIMAL,
     KEY_IDS.EQUALS,
   ],
+];
+
+/* Keep the result if any of these keys is pressed right after computation */
+export const KEEP_RESULT_KEYS = [
+  KEY_IDS.ADD,
+  KEY_IDS.SUBTRACT,
+  KEY_IDS.MULTIPLY,
+  KEY_IDS.DIVIDE,
+  KEY_IDS.POWER,
+  KEY_IDS.SQUARE,
+  KEY_IDS.EQUALS,
+  KEY_IDS.MEMORY_CLEAR,
+  KEY_IDS.MEMORY_ADD,
+  KEY_IDS.MEMORY_SUBTRACT,
+  KEY_IDS.MEMORY_RECALL,
 ];
 
 export const KEY_PRESS_EVENT = 'key-press';
