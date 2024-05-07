@@ -1,3 +1,5 @@
+export const ROOT_ELEMENT_SELECTOR = '#calculator';
+
 export const KEYS = [
   [
     { value: 'mc', label: 'mc', type: 'operation' },
